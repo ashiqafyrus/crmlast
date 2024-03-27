@@ -1,0 +1,294 @@
+{% extends "navbar.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <!-- Other meta tags and stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<div class="container">
+    <div>
+    <div class="row justify-content-center align-items-center"> <!-- Center the content horizontally and vertically -->
+        <div class="col-md-8">
+            <div class="paragraph container1 text-center"> <!-- Center the content vertically and horizontally -->
+                <h1 class="innovative-text">Free AI-powered CRM with unlimited users</h1>
+                <h4>A perfect CRM system for those who want to make a fortune without spending a fortune</h4>
+                <p class="innovative-paragraph">Sell more. Sell better. Sell faster.</p>
+                <button class="btn btn-primary mr-2 innovative-button">GET STARTED</button> <!-- Design the primary button -->
+                <button class="btn btn-secondary innovative-button">WATCH DEMO</button> <!-- Design the secondary button -->
+            </div>
+        </div>
+        <div class="col-md-4 text-center"> <!-- Adjusted column width and centered content -->
+            <img src="{% static 'images/gigimg.avif' %}" alt="Logo 1" class="animated-image" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+    </div>
+    <br><br>
+    <div>
+        
+    <div class="row justify-content-center mt-4 para2"> <!-- Center the para2 horizontally -->
+        <div class="col-md-8 text-center">
+            <div class="para2-content">
+                <h1>A single CRM platform to manage leads, engage with clients, and close deals</h1>
+                <h6>Bitrix24 is a one-stop free CRM tool for businesses that are looking for complete control over their sales process - from lead acquisition to customer service.</h6>
+            </div>
+        </div>
+    </div></div>
+    <br><br>
+    <div>
+    <div class="row justify-content-center mt-4 para3"> <!-- Center the para3 horizontally -->
+        <div class="col-md-12 text-center"> <!-- Increase width using col-md-10 -->
+            <div class="para3-content animated fadeIn"> <!-- Add animation class -->
+                <h1 class="para3-heading">AI-powered sales</h1>
+                <p class="para3-description">Use our AI assistant to streamline and automate some of your sales operations, create ideas for prom campaigns, write compelling copy, and more.
+                    A full-sized, full-fledged mobile CRM that you can use to manage clients and sales right out of your pocket.
+                </p>
+            </div>
+        </div>
+    </div></div>
+    <br><br>
+    <div>
+    <div class="row justify-content-center mt-4 para4"> <!-- Center the para4 horizontally -->
+        <div class="col-md-6 text-center"> <!-- Increase width using col-md-6 -->
+            <img src="{% static 'images/para3.avif' %}" class="para4-image">
+        </div>
+        <div class="col-md-6 text-left"> <!-- Increase width using col-md-6 -->
+            <div class="para4-content animated fadeIn"> <!-- Add animation class -->
+                <h6 class="para4-heading">Call transcription</h6>
+                <p class="para4-text">CoPilot can automatically transcribe incoming phone calls in a nice and easily readable text format.</p>
+                <h6 class="para4-heading">Autocompleted fields in CRM</h6>
+                <p class="para4-text">CoPilot is capable of using call transcription data to autocomplete the fields in a deal (name, phone, etc.).</p>
+                <h6 class="para4-heading">Fresh ideas for your business</h6>
+                <p class="para4-text">CoPilot can easily come up with a solid idea for your marketing campaign or special offer.</p>
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search here...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>
+<style>
+.para4-content img {
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    height: 200px; /* Allow the image to maintain its aspect ratio */
+    border-radius: 10px; /* Add border radius for a rounded look */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.para4-content img:hover {
+    transform: scale(1.05); /* Scale up the image on hover */
+}
+    .para4-content {
+        margin-top: 40px; /* Adjust top margin for spacing */
+        background-color: #f8f9fa; /* Light gray background */
+        padding: 20px; /* Add padding for content */
+        border-radius: 10px; /* Add border radius */
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+    }
+    .para4-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+    .para4-image {
+        max-width: 100%; /* Ensure the image doesn't exceed its container */
+        height: 450px; /* Allow the image to adjust its height */
+        border-radius: 10px; /* Add border radius for a rounded look */
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+        transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    }
+    
+    .para4-image:hover {
+        transform: scale(1.05); /* Scale up the image on hover */
+    }
+    
+    .para4-text {
+        font-size: 18px; /* Adjust font size */
+        color: #333; /* Choose your desired color */
+        line-height: 1.6; /* Adjust line height */
+        margin-bottom: 15px;
+    }
+    
+    .para4-text h6 {
+        font-size: 20px; /* Adjust font size */
+        font-weight: bold;
+        color: #FF5733; /* Choose your desired color */
+        margin-top: 20px; /* Adjust top margin for spacing */
+    }
+    
+    .para4-text p {
+        margin-top: 10px; /* Adjust top margin for spacing */
+    }
+    
+    </style>
+    
+<style>
+
+.container1 {
+    background-color: #dbe6f1; /* Light gray background */
+    padding: 30px; /* Add padding for spacing */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container1 h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.container1 h4 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.container1 p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.animated-image {
+    animation: moveImage 5s linear infinite; /* Define the animation */
+}
+
+@keyframes moveImage {
+    0% {
+        transform: translateX(0); /* Start position */
+    }
+    100% {
+        transform: translateX(100px); /* End position */
+    }
+}
+
+.innovative-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    background-image: linear-gradient(to right, #ff9a00, #ff8f00, #ff8400, #ff7800, #ff6b00);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 5s linear infinite;
+}
+
+.innovative-paragraph {
+    font-size: 18px;
+    color: #777;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.innovative-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.innovative-button:hover {
+    background-color: #45a049; /* Darker shade on hover */
+    transform: scale(1.05);
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+}
+
+.para2 {
+    margin-top: 40px; /* Adjust top margin for spacing */
+    background-image: url("{% static 'images/crmhome.jpg' %}"); /* Add background image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    padding: 50px 0; /* Add padding for content */
+}
+
+.para2-content {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for content */
+    padding: 20px; /* Add padding for content */
+    border-radius: 10px; /* Add border radius */
+}
+
+.para2 h1 {
+    font-size: 28px; /* Adjust font size */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.para2 h6 {
+    font-size: 16px; /* Adjust font size */
+    color: #333;
+    margin-top: 10px; /* Adjust top margin for spacing */
+}
+.para3-heading {
+    font-size: 36px; /* Adjust font size */
+    font-weight: bold;
+    color: #FF5733; /* Choose your desired color */
+    margin-bottom: 20px; /* Adjust bottom margin for spacing */
+    text-transform: uppercase; /* Convert text to uppercase */
+    letter-spacing: 2px; /* Add letter spacing */
+}
+
+.para3-description {
+    font-size: 18px; /* Adjust font size */
+    color: #555; /* Choose your desired color */
+    line-height: 1.6; /* Adjust line height */
+    margin-bottom: 30px; /* Adjust bottom margin for spacing */
+    text-align: justify; /* Justify text */
+}
+.para3-content {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa; /* Light gray background */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+/* Animation */
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.search-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.search-input {
+    padding: 10px 40px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #FF5733;
+}
+
+</style>
+{% endblock %}

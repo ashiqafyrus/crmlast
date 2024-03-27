@@ -1,0 +1,172 @@
+{% extends "drag.html" %}
+{% block content %}
+<style>
+    /* General styling */
+    body {
+        background-color: #f8f9fa; /* Set background color for the body */
+        margin: 0; /* Reset margin to remove default spacing */
+        padding-bottom: 60px; /* Added padding to ensure content doesn't overlap with the footer */
+    }
+
+    .content-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 25px 10px;
+        text-align: justify;
+        margin-bottom: 100px;
+        overflow-y: auto;
+        background-color: #fff; /* Set background color for the content container */
+        border-radius: 10px; /* Added border radius for a softer look */
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+        animation: fadeIn 1s ease; /* Apply the fadeIn animation */
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #007bff;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .service-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 50px; /* Reduce margin for smaller screens */
+    }
+    .service-image {
+        width: auto; /* Allow the width to adjust automatically */
+        height: auto; /* Allow the height to adjust automatically */
+        max-width: 100%; /* Limit maximum width to prevent overflow */
+        max-height: 200px; /* Limit maximum height for consistency */
+        margin-bottom: 20px;
+    }
+    .card-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center cards on smaller screens */
+    }
+
+    .card {
+        width: calc(33.33% - 20px); /* Adjust width and margin as needed */
+        margin: 0 10px 20px; /* Adjust margin for smaller screens */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Align card content to center */
+        opacity: 0;
+        transform: translateY(50px); /* Initial position off-screen */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    }
+
+    .card.animated.fade-in {
+        opacity: 1;
+        transform: translateY(0); /* Move to original position */
+    }
+
+    .card.animated.slide-in {
+        opacity: 1;
+        transform: translateX(0); /* Move to original position */
+    }
+
+    .card.animated.zoom-in {
+        opacity: 1;
+        transform: scale(1); /* Scale to original size */
+    }
+
+    .card.animated.rotate-in {
+        opacity: 1;
+        transform: rotate(0); /* Rotate to original position */
+    }
+    .card-img-top {
+        width: 100%;
+        height: auto; /* Allow the height to adjust automatically */
+        max-width: 100%; /* Ensure the image fills the width of the card */
+        max-height: 150px; /* Limit maximum height for consistency */
+        margin-bottom: 10px;
+    }
+    @media (max-width: 768px) {
+        .content-container {
+            padding: 25px; /* Adjust padding for smaller screens */
+        }
+
+        .service-container {
+            margin-bottom: 30px; /* Reduce margin for smaller screens */
+        }
+
+        .card {
+            width: calc(50% - 20px); /* Adjust width for smaller screens */
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            width: calc(100% - 20px); /* Adjust width for even smaller screens */
+        }
+    }
+</style>
+
+<div class="content-container">
+    <h1>CHECK OUR SERVICES</h1>
+    <div class="service-container">
+        <h2>Digital Marketing</h2>
+        {% load static %}
+        <img src="{% static 'images/dig.jpeg' %}" alt="Digital Marketing" class="service-image">
+        <p>Also called online marketing, is the promotion of brands to connect with potential customers using the internet and other forms of digital communication. It encompasses all marketing efforts that use electronic devices or the internet. It involves promoting products or services through various digital channels to reach a target audience, engage them, and drive desired actions.</p>
+    </div>
+    <div class="card-group">
+        <div class="card animated fade-in">
+            <img class="card-img-top" src="{% static 'images/search.png' %}" alt="Card image cap" >
+            <div class="card-body">
+                <h5 class="card-title">SEO Optimization</h5>
+                <p class="card-text">The Process Of Improving Your Site To Increase Its Visibility When People Search For Products Or Services Related To Your Business In Google,
+                     Bing, And Other Search Engines.</p>
+                <p class="card-text"><small class="text-muted">know more</small></p>
+            </div>
+        </div>
+        <div class="card animated slide-in">
+            <img class="card-img-top" src="{% static 'images/content.png' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Content Marketing</h5>
+                <p class="card-text">Content marketing is a marketing strategy used to attract, engage,
+                     and retain an audience by creating and sharing relevant articles, videos, podcasts, and other media.
+                    </p>
+                <p class="card-text"><small class="text-muted">know more</small></p>
+            </div>
+        </div>
+        <div class="card animated zoom-in">
+            <img class="card-img-top" src="{% static 'images/aso.jpeg' %}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">App store Optimization</h5>
+                <p class="card-text">
+                    It is the process of optimizing mobile apps to rank higher in an app store's search results.
+                     The higher your app ranks , the more visible it is to potential customers.</p>
+                <p class="card-text"><small class="text-muted">know more</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

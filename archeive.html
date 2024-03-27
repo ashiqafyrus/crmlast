@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Fonts */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Global Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            padding-top: 50px;
+        }
+
+        /* Basic styling for the vertical navbar */
+        .navbar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: -200px; /* Initially hidden */
+            background-color: #333; /* Dark background */
+            padding-top: 20px;
+            transition: left 0.3s; /* Smooth transition */
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar li {
+            margin-bottom: 10px;
+        }
+
+        .navbar a {
+            display: block;
+            padding: 10px;
+            color: #fff; /* White text */
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #555; /* Darker color on hover */
+        }
+
+        /* Basic styling for the horizontal navbar */
+    .horizontal-navbar {
+        background-color: #333; /* Dark background */
+        padding: 10px 20px;
+        overflow: hidden;
+        position: fixed;
+        top: 0px;
+        left: 50px; /* Adjusted to match the width of the vertical navbar */
+        width: 100%; /* Adjusted to fill the remaining width */
+        z-index: 1100; /* Ensure it's above the vertical navbar */
+        transition: top 0.3s; /* Smooth transition */
+    }
+
+    .horizontal-navbar a {
+        float: left;
+        display: block;
+        color: #fff; /* White text */
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .horizontal-navbar a:hover {
+        background-color: #555; /* Darker color on hover */
+    }
+
+        /* Toggle buttons */
+        .toggle-button {
+            position: fixed;
+            top: 20px;
+            cursor: pointer;
+            color: #fff; /* White text */
+            z-index: 1001; /* Ensure it's above other elements */
+            background-color: #333; /* Dark background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .toggle-horizontal-navbar {
+            display: none; /* Initially hidden */
+            right: 20px;
+        }
+
+        /* Content area */
+        .content {
+            margin-top: 70px; /* Space for both navbars */
+            background-color: #f9f9f9; /* Light background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 30%; /* Full width */
+                left: -100%; /* Initially hidden */
+            }
+
+            .horizontal-navbar {
+                top: 0px; /* Adjusted top position */
+                width: 100%; /* Full width */
+            }
+
+            .toggle-horizontal-navbar {
+                display: block; /* Show toggle button */
+            }
+
+            /* Adjust content margin for smaller screens */
+            .content {
+                margin-top: 80px; /* Adjusted top margin */
+            }
+        }
+        /* Custom styling for the card */
+  /* Custom styling for the card */
+  .card {
+            border: none; /* Remove default border */
+            border-radius: 15px; /* Add border-radius for rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+            transition: transform 0.3s; /* Add smooth transition for hover effect */
+            width: 200px; 
+            background-color: #fff; /* White background */
+            overflow: hidden; /* Hide overflowing content */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Apply translateY transform on hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+        }
+
+        /* Custom styling for the card body */
+        .card-body {
+            padding: 20px; /* Add padding for content inside the card */
+        }
+
+      /* Custom styling for card title */
+.card-title {
+    font-size: 1.5rem; /* Increase font size for title */
+    margin-bottom: 10px; /* Add margin at the bottom of title */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center align the title */
+    position: relative; /* Set position to relative for pseudo elements */
+}
+
+/* Pseudo element for underline */
+.card-title::after {
+    content: ""; /* Add content */
+    position: absolute; /* Set position to absolute */
+    bottom: 0; /* Align to the bottom */
+    left: 50%; /* Align to the center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    width: 50px; /* Set width of underline */
+    height: 3px; /* Set height of underline */
+   
+}
+
+/* Pseudo element for decoration */
+.card-title::before {
+    content: ""; /* Add content */
+    position: absolute; /* Set position to absolute */
+    top: -20px; /* Position above the title */
+    left: 50%; /* Align to the center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    width: 40px; /* Set width of decoration */
+    height: 40px; /* Set height of decoration */
+   
+    border-radius: 50%; /* Make it a circle */
+}
+
+        /* Custom styling for card text */
+        .card-text {
+            color: #555; /* Change text color */
+            text-align: center; /* Center align the text */
+        }
+
+        /* Custom styling for card button */
+        .btn-custom {
+            background-color: #333; /* Change button background color */
+            color: #fff; /* Change button text color */
+            border: none; /* Remove button border */
+            padding: 10px 20px; /* Add padding */
+            border-radius: 5px; /* Add border-radius for rounded corners */
+            transition: background-color 0.3s; /* Add smooth transition for hover effect */
+            display: block; /* Make the button a block element */
+            margin: 0 auto; /* Center align the button */
+        }
+
+        .btn-custom:hover {
+            background-color: #555; /* Darker color on hover */
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 576px) {
+            .card {
+                width: 100%; /* Set width to 100% for smaller screens */
+                max-width: 300px; /* Set maximum width if needed */
+            }
+            .col-sm-4 {
+                margin-bottom: 10px; /* Reduce margin for smaller screens */
+            }
+        }
+        .col-sm-4 {
+            margin-bottom: 20px; /* Add margin between rows */
+        }
+
+
+        .card-container{
+            padding-top: 30px;
+        }
+/* Custom styling for card button */
+.card-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.card-button a {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.card-button a:hover {
+    background-color: #555;
+}
+.archive-info {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #555; /* Text color */
+            font-size: 1.1rem; /* Increase font size */
+        line-height: 1.8; 
+        }
+        footer .container {
+    padding-left: 100px; /* Add padding to the left side of the container */
+    padding-right: 15px; /* Add padding to the right side of the container */
+}
+.head {
+        text-align: center; /* Center align the heading */
+        margin-bottom: 20px; /* Add some bottom margin */
+        color: #333; /* Dark text color */
+        font-size: 2.5rem; /* Increase font size */
+        font-weight: bold; /* Add bold font weight */
+        text-transform: uppercase; /* Uppercase text */
+        letter-spacing: 2px; /* Increase letter spacing */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add text shadow */
+    }
+
+    </style>
+</head>
+<body>
+   <!-- Toggle button for vertical navbar -->
+   <div class="toggle-button" onclick="toggleNavbar()">
+    &#9776; <!-- Hamburger icon -->
+</div>
+
+     <!-- Vertical Navbar -->
+     <nav class="navbar" id="vertical-navbar">
+        <ul><li><a></a></li>
+            <li><a href="{% url 'crmarchive' %}">Archive<i class="bi bi-archive"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                  </svg>
+                </a></li>
+            <li><a href="{% url 'crmloginpage' %}">User home
+                <i class="bi bi-house"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                  </svg>
+            </a></li>
+            <li><a href="#">Sales<i class="bi bi-receipt"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
+                    <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
+                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+                  </svg></a></li>
+            <li><a href="#">Settings<i class="bi bi-gear"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                  </svg></a></li>
+            <li><a href="{% url 'log_out' %}">Logout<i class="bi bi-box-arrow-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                  </svg></a></li>
+        </ul>
+    </nav>
+
+   
+{% load static %}
+    <div class="container content">
+        <h1 class="head">The files you archived</h1>
+        <p class="archive-info">
+            Archive cards contain previously archived items. You can view and manage these archived items from this section.
+        </p>
+        <div class="row mt-3" id="card-container">
+            {% for i in arch %}
+            <div class="col-sm-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">{{i.app.name}}</h1>
+                        <hr>
+                        <img class="card-img-top" src="{% static 'images/card.jpg' %}" alt="App Store Optimization">
+                        <p class="card-text"><b>{{i.app.price}}</b></p>
+                        <div class="card-button">
+                            <a href="{% url 'archiveremove' i.id %}">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+          
+        </div>
+        <footer class="bg-light text-black mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>About Us</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida turpis nec est finibus, a
+                            elementum ex malesuada.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contact Info</h5>
+                        <p>123, Street Name, City<br>Country</p>
+                        <p>Email: info@example.com<br>Phone: +1234567890</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+       <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script to toggle vertical navbar -->
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("vertical-navbar");
+            if (navbar.style.left === "0px") {
+                navbar.style.left = "-200px"; // Hide the navbar
+            } else {
+                navbar.style.left = "0px"; // Show the navbar
+            }
+        }
+    </script>
+
+    <!-- Script to toggle horizontal navbar (responsive) -->
+    <script>
+        function toggleHorizontalNavbar() {
+            var navbar = document.querySelector(".horizontal-navbar");
+            if (navbar.style.top === "0px") {
+                navbar.style.top = "-50px"; // Hide the navbar
+            } else {
+                navbar.style.top = "0px"; // Show the navbar
+            }
+        }
+    </script>
+
+
+</body>
+</html>

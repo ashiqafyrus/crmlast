@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .megamenu {
+   position: static;
+ }
+ 
+ .megamenu .dropdown-menu {
+             background: none;
+             border: none;
+             width: 100%;
+             animation: fadeIn 0.5s ease;
+             transition: opacity 0.3s ease-in-out;
+         }
+ 
+ @keyframes fadeIn {
+             from {
+                 opacity: 0;
+             }
+             to {
+                 opacity: 1;
+             }
+         }
+ 
+ 
+ code {
+   color: #745eb1;
+   background: #fff;
+   padding: 0.1rem 0.2rem;
+   border-radius: 0.2rem;
+ }
+ 
+ .text-uppercase {
+   letter-spacing: 0.08em;
+ }
+ .dropdown-menu {
+        border: none;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+   /* Custom styles for dropdown menu items */
+   .dropdown-menu .nav-item .nav-link {
+            color: #333; /* Text color */
+            
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu .nav-item .nav-link:hover {
+            color: #007bff; /* Text color on hover */
+            background-color: #cedff1;
+        }
+        /* Optional: Add animation on hover */
+.dropdown-menu .nav-item .nav-link:hover::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #007bff; /* Color of the underline */
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.dropdown-menu .nav-item .nav-link:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+.dropdown-menu .nav-item:last-child .nav-link {
+        border-bottom: none; /* Remove border from last item */
+    }
+ /* Footer styles */
+ footer {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #333;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+ </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'crmcontent' %}">
+            <h1>CRM</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+                </li>
+               
+                <li class="nav-item dropdown megamenu"><a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">Apps</a>
+                    <div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
+                      <div class="container-fluid">
+                        <div class="row bg-light rounded-0 m-0 shadow-sm">
+                          <div class="col-lg-7 col-xl-12">
+                            <div class="p-4">
+                              <div class="row">
+                                <div class="col-lg-3 mb-4">
+                                  <h6 class="font-weight-bold text-uppercase">Finance</h6>
+                                  <hr class="hr-divider">
+                                  <ul class="list-unstyled">
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Accounting</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Invoicing</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Expenses</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Spreadsheet</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Documents</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Sign</a></li>
+                                  </ul>
+                                </div>
+                                <div class="col-lg-3 mb-4">
+                                  <h6 class="font-weight-bold text-uppercase">Sales</h6>
+                                  <hr class="hr-divider">
+                                  <ul class="list-unstyled">
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">CRM</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Sales</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Point of Sale - Shop</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Point of Sale - Restaurant</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Point of Sale - Subscriptions</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Point of Sale - Restaurant</a></li>
+                                    
+                                  </ul>
+                                </div>
+                                <div class="col-lg-3 mb-4">
+                                  <h6 class="font-weight-bold text-uppercase">Website</h6>
+                                  <hr class="hr-divider">
+                                  <ul class="list-unstyled">
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Website Builder</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">eCommerce</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Blog</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Forum</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Live Chat</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">eLearning</a></li>
+                                  </ul>
+                                 
+                                </div>
+                                <div class="col-lg-3 mb-4">
+                                  <h6 class="font-weight-bold text-uppercase">Inventory and MRP</h6>
+                                  <hr class="hr-divider">
+                                  <ul class="list-unstyled">
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Inventory</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Manufacturing</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">PLM</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Purchase</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Maintenance</a></li>
+                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Quality</a></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-3 mb-4">
+                                    <h6 class="font-weight-bold text-uppercase">Human Resources</h6>
+                                    <hr class="hr-divider">
+                                    <ul class="list-unstyled">
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0">Employees</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Recruitment</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Time Off</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Appraisals</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Referrals</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Fleet</a></li>
+                                    </ul>
+                              
+                                  </div>
+                                  <div class="col-lg-3 mb-4">
+                                    <h6 class="font-weight-bold text-uppercase">Marketing</h6>
+                                    <hr class="hr-divider">
+                                    <ul class="list-unstyled">
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Social Marketing</a></li>
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Email Marketing</a></li>
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">SMS Marketing</a></li>
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Events</a></li>
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Marketing Automation</a></li>
+                                        <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Surveys</a></li>
+                                      
+                                    </ul>
+                                   
+                                  </div>
+                                  <div class="col-lg-3 mb-4">
+                                    <h6 class="font-weight-bold text-uppercase">Services</h6>
+                                    <hr class="hr-divider">
+                                    <ul class="list-unstyled">
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Project</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Timesheets</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Field Service</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Helpdesk</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Planning</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Appointments</a></li>
+                                    </ul>
+                                    
+                                  </div>
+                                  <div class="col-lg-3 mb-4">
+                                    <h6 class="font-weight-bold text-uppercase">Productivity</h6>
+                                    <hr class="hr-divider">
+                                    <ul class="list-unstyled">
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Discuss</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Approvals</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">IoT</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">VoIP</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Knowledge</a></li>
+                                      <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">WhatsApp</a></li>
+                                    </ul>
+                                    
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-container">
+        <div id="content-wrap" class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <footer class="bg-light text-black ">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida turpis nec est finibus, a
+                        elementum ex malesuada.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <p>123, Street Name, City<br>Country</p>
+                    <p>Email: info@example.com<br>Phone: +1234567890</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+          
+    <script>
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                var scroll = $(window).scrollTop();
+                if (scroll > 0) {
+                    $(".footer").css("bottom", "-100px");
+                }
+                else{
+                    $(".footer").css("bottom", "0");
+                }
+            });
+        });
+        $('.dropdown-toggle').dropdown();
+    </script>
+</body>
+</html>

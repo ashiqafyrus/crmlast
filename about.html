@@ -1,0 +1,173 @@
+{% extends "navbar.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .image-gallery {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center align items vertically */
+        flex-wrap: wrap; /* Allow images to wrap to the next line on smaller screens */
+        gap: 20px; /* Adjust the gap between images */
+        margin-bottom: 40px;
+    }
+
+    .image-gallery img {
+        max-width: 300px; /* Ensure images don't exceed their container */
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        /* Add innovative effect */
+        filter: grayscale(100%) brightness(70%);
+    }
+    @media only screen and (max-width: 576px) {
+        .image-gallery img {
+            flex: 0 0 100%; /* Each image takes full width on smaller screens */
+        }
+    }
+    .image-gallery img:hover {
+        transform: scale(1.1);
+        /* Add innovative effect on hover */
+        filter: grayscale(0%) brightness(100%);
+    }
+
+    .section {
+        margin-bottom: 60px;
+    }
+
+    .card-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .card {
+        flex: 0 0 calc(33.33% - 30px);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .text-muted {
+        color: #999;
+    }
+
+    /* Media Queries for Responsiveness */
+
+    @media only screen and (max-width: 992px) {
+        .card {
+            flex: 0 0 calc(50% - 30px);
+        }
+    }
+
+    @media only screen and (max-width: 576px) {
+        .image-gallery img {
+            width: 100%;
+            max-width: none;
+        }
+
+        .card {
+            flex: 0 0 calc(100% - 30px);
+        }
+    }
+</style>
+<div class="content-container">
+    <section class="section" id="about-us">
+        <h1>About Our Innovative Ideas</h1>
+        <p>At Astray Technologies, we don't just follow trends, we set them. We're not satisfied with conventional solutions; we thrive on innovation. Our team of visionaries is dedicated to pushing the boundaries of what's possible in the digital realm.</p>
+        <div class="image-gallery">
+            <img src="{% static 'images/customer.jpg' %}" alt="Image 2">
+            <img src="{% static 'images/hand.jpg' %}" alt="Image 3">
+        </div>
+        <p>Our expertise spans beyond traditional development services. We're pioneers in crafting experiences that captivate and inspire. From cutting-edge websites to immersive mobile apps, we redefine industry standards with every project we undertake.</p>
+        <p>But what truly sets us apart is our unwavering commitment to innovation. We don't just meet expectations; we exceed them. Our solutions are not just functional; they're transformative. Partner with us, and together, we'll bring your boldest ideas to life.</p>
+    </section>
+
+    <section class="section" id="services">
+        <h1>Our Revolutionary Services</h1>
+        <div class="card-group">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/1000.jpg' %}" alt="SEO Optimization">
+                <div class="card-body">
+                    <h5 class="card-title">Revolutionize Your SEO</h5>
+                    <p class="card-text">Say goodbye to ordinary SEO strategies. We specialize in revolutionizing your online presence with cutting-edge SEO techniques that propel your website to the top of search engine rankings.</p>
+                    <p class="card-text"><small class="text-muted">Discover More</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/content.png' %}" alt="Content Marketing">
+                <div class="card-body">
+                    <h5 class="card-title">Elevate Your Content</h5>
+                    <p class="card-text">Content is king, but not all content is created equal. Let us elevate your brand with content marketing strategies that captivate, engage, and inspire your audience like never before.</p>
+                    <p class="card-text"><small class="text-muted">Explore More</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/aso.jpeg' %}" alt="App Store Optimization">
+                <div class="card-body">
+                    <h5 class="card-title">Optimize Your App's Success</h5>
+                    <p class="card-text">Don't settle for mediocrity in the app store. Let us optimize your app's success with innovative ASO strategies that drive downloads, engagement, and revenue growth.</p>
+                    <p class="card-text"><small class="text-muted">Learn More</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

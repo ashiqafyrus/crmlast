@@ -1,0 +1,364 @@
+{% extends "navbar.html" %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-bottom: 0px;
+    }
+
+    .main-content {
+        flex: 1;
+        margin-right: 20px;
+        margin-bottom: 0px; /* Adjusted margin-bottom */
+    }
+
+    .parallax {
+        position: relative;
+        height: 100vh; /* Adjust height as needed */
+        background-image: url('{% static "images/backvector.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: black; /* Text color */
+        overflow: hidden; /* Hide overflow content */
+    }
+
+    .parallax-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7); /* Add a semi-transparent overlay */
+    }
+
+    .parallax-content {
+        position: relative; /* Make content position relative to the parallax container */
+        z-index: 1; /* Ensure content appears above overlay */
+        max-width: 800px; /* Limit content width */
+        padding: 20px;
+        color: #333; /* Text color */
+    }
+
+    .parallax-content h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .parallax-content h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .parallax-content p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .parallax-content a button {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #007bff; /* Button color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .parallax-content a button:hover {
+        background-color: #0056b3; /* Button hover color */
+    }
+
+    .side-card {
+        flex-basis: 100%; /* Adjust width for mobile */
+        margin-top: 20px; /* Adjusted margin-top */
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .side-card h3 {
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .side-card p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .side-card button {
+        display: block;
+        margin: 0 auto 20px;
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+    .side-card button:hover {
+        background-color: #0056b3;
+    }
+
+    .additional-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        
+        position: relative;
+    }
+    .additional-card:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #f8f9fa transparent; /* Triangle above the card */
+}
+
+    .additional-card-content {
+        text-align: center;
+    }
+
+    .additional-card h3 {
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .additional-card p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .additional-card form {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .additional-card label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .additional-card input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .additional-card button {
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+    .additional-card button:hover {
+        background-color: #0056b3;
+    }
+/* Hover effect */
+.additional-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+/* Triangle above the card */
+.additional-card:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #f8f9fa transparent; /* Triangle above the card */
+}
+    .questionare {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .questionare h3 {
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .questionare ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    .questionare li {
+        margin-bottom: 10px;
+    }
+
+    .questionare a {
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .questionare a:hover {
+        color: #0056b3;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .main-content,
+        .side-card {
+            flex-basis: auto;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+    }
+
+    .vector-graphic {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .chat-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .df-messenger-wrapper {
+        max-width: 600px;
+        width: 100%;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .parallax-content,
+    .side-card {
+        animation: fadeIn 1s ease-in-out; /* Apply fade-in animation */
+    }
+</style>
+
+<div class="container">
+    <div class="main-content">
+        <!-- Parallax section -->
+        <div class="parallax">
+            <div class="parallax-overlay"></div>
+            <div class="parallax-content">
+                <h1>Applications</h1>
+                <h2>We Excel in Professional IT Solutions</h2>
+                <p>Elevate your business with Astray Applications. As a software development company based in Finland, we specialize in crafting custom websites and software solutions tailored to your unique business needs. Our team of experts is dedicated to streamlining operations, boosting efficiency, and making a lasting impact. Partner with us to achieve unparalleled success with quality and excellence at the forefront. CRM is the true customer-centric tool for your sales needs. Track leads, get accurate forecasts, and focus on what matters: closing opportunities.</p>
+                <a href="{% url 'about' %}">
+                    <button>Learn More</button>
+                </a>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Side card section -->
+    <div class="side-card">
+        <h3>Special Offer</h3>
+        <p>Don't miss our special offer! Get 20% off on all services for a limited time only.</p>
+        <button>Learn More</button>
+        <div style="text-align: center;">
+            <img src="{% static 'images/isometric.jpg' %}" alt="Logo 1" width="150px" height="150px">
+        </div><br>
+        <div class="additional-card">
+            <h3>Additional Information</h3>
+            <p>If you need any additional information please subscribe us using email id.</p>
+            <form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div><br>
+        <div class="questionare">
+            <h3>JUMP TO A SECTION</h3>
+            <ul>
+                <li><a href="#what-crm-does">What does a CRM system do?</a></li>
+                <li><a href="#how-crm-helps">How exactly does a CRM help you?</a></li>
+                <li><a href="#crm-benefits">Top benefits of CRM software</a></li>
+                <li><a href="#crm-work">How does CRM software work?</a></li>
+                <li><a href="#crm-automation">How does CRM automation work?</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="chat-container">
+    <df-messenger intent="WELCOME" chat-title="Your Chat Title" agent-id="YOUR_AGENT_ID" language-code="en"></df-messenger>
+</div>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<script>
+    window.dfMessenger = window.dfMessenger || {
+        init: function (options) {
+            window.dfMessenger.settings = options;
+        }
+    };
+    dfMessenger.init({
+        projectId: 'YOUR_PROJECT_ID',
+        location: 'us-central1',
+        language: 'en'
+    });
+</script>
+{% endblock %}

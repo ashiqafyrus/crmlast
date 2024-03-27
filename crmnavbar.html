@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% load static %}
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+           
+        }
+
+        /* Fonts */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 10px;
+        }
+
+        /* Global Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            padding-top: 50px;
+        }
+
+        /* Basic styling for the vertical navbar */
+        .navbar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: -200px; /* Initially hidden */
+            background-color: #333; /* Dark background */
+            padding-top: 20px;
+            transition: left 0.3s; /* Smooth transition */
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar li {
+            margin-bottom: 10px;
+        }
+
+        .navbar a {
+            display: block;
+            padding: 10px;
+            color: #fff; /* White text */
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #555; /* Darker color on hover */
+        }
+
+        /* Basic styling for the horizontal navbar */
+    .horizontal-navbar {
+        background-color: #333; /* Dark background */
+        padding: 10px 20px;
+        overflow: hidden;
+        position: fixed;
+        top: 0px;
+        left: 50px; /* Adjusted to match the width of the vertical navbar */
+        width: 100%; /* Adjusted to fill the remaining width */
+        z-index: 1100; /* Ensure it's above the vertical navbar */
+        transition: top 0.3s; /* Smooth transition */
+    }
+
+    .horizontal-navbar a {
+        float: left;
+        display: block;
+        color: #fff; /* White text */
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .horizontal-navbar a:hover {
+        background-color: #555; /* Darker color on hover */
+    }
+
+        /* Toggle buttons */
+        .toggle-button {
+            position: fixed;
+            top: 20px;
+            cursor: pointer;
+            color: #fff; /* White text */
+            z-index: 1001; /* Ensure it's above other elements */
+            background-color: #333; /* Dark background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .toggle-horizontal-navbar {
+            display: none; /* Initially hidden */
+            right: 20px;
+        }
+
+        /* Content area */
+        .content {
+            margin-top: 70px; /* Space for both navbars */
+            background-color: #f9f9f9; /* Light background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 768px) {
+            .navbar {
+                width: 30%; /* Full width */
+                left: -100%; /* Initially hidden */
+            }
+
+            .horizontal-navbar {
+                top: 0px; /* Adjusted top position */
+                width: 100%; /* Full width */
+            }
+
+            .toggle-horizontal-navbar {
+                display: block; /* Show toggle button */
+            }
+
+            /* Adjust content margin for smaller screens */
+            .content {
+                margin-top: 80px; /* Adjusted top margin */
+            }
+        }
+        .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align cards horizontally */
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: 200px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 50% 100%, 0% 90%);
+    margin: 10px; /* Add margin between cards */
+}
+.card:hover {
+    transform: translateY(-5px); /* Apply translateY transform on hover */
+}
+
+/* Custom styling for the card body */
+.card-body {
+    padding: 10px; /* Add default padding for content inside the card */
+
+    /* Responsive padding adjustments */
+    @media (max-width: 576px) {
+        padding: 5px; /* Reduce padding for smaller screens */
+    }
+
+    @media (max-width: 360px) {
+        padding: 0px; /* Further reduce padding for even smaller screens */
+    }
+}
+
+.card-title {
+    font-size: 1.5rem; /* Increase font size for title */
+    margin-bottom: 10px; /* Add margin at the bottom of title */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center align the title */
+    position: relative; /* Set position to relative for pseudo elements */
+}
+
+
+/* Custom styling for card text */
+.card-text {
+    color: #555; /* Change text color */
+}
+
+/* Custom styling for card button */
+.btn-custom {
+    background-color: #333; /* Change button background color */
+    color: #fff; /* Change button text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    transition: background-color 0.3s; /* Add smooth transition for hover effect */
+}
+
+.btn-custom:hover {
+    background-color: #555; /* Darker color on hover */
+}
+/* Media Query for smaller screens */
+@media (max-width: 576px) {
+    .cards {
+        justify-content: center; /* Align cards to start on smaller screens */
+    }
+    
+    .card {
+        width: calc(33.33% - 20px); /* Adjust width for smaller screens with margin */
+      
+    }
+    .col-sm-4 {
+        margin-bottom: 10px; /* Reduce margin for smaller screens */
+    }
+}
+.col-sm-4 {
+    margin-bottom: 20px; /* Add margin between rows */
+}
+
+.card-container{
+    padding-top: 30px;
+}
+
+    .delete-icon {
+        display: none; /* Initially hidden */
+        justify-content: flex-end; /* Align icon to the right */
+    margin-bottom: 10px; 
+    }
+    .delete-icon img {
+    cursor: pointer; /* Change cursor to pointer */
+}
+    .card1 {
+    background-color: #fff; /* White background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 10px; /* Adjust padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-top: 50px;
+   
+    border-radius: 10px; /* Add border-radius for a softer look */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+}
+
+.container .row {
+    margin: 20px 0; /* Add margin to separate rows */
+}
+
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6 {
+    color: #333333; /* Set heading color */
+}
+
+.container p {
+    color: #666666; /* Set paragraph text color */
+    line-height: 1.6; /* Set line height for better readability */
+}
+
+.container a {
+    color: #007bff; /* Set link color */
+    text-decoration: none; /* Remove default underline */
+}
+
+.container a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.container .btn {
+    background-color: #007bff; /* Set button background color */
+    color: #ffffff; /* Set button text color */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 10px 20px; /* Add padding */
+    transition: background-color 0.3s; /* Add smooth transition */
+}
+
+.container .btn:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
+.container .service-container {
+    text-align: center;
+    margin-top: 40px; /* Increase top margin */
+    padding: 30px; /* Increase padding */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 20px; /* Add border-radius for a softer look */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+}
+
+.container .service-container h2 {
+    color: #333333; /* Set heading color */
+    font-size: 2rem; /* Increase font size */
+}
+
+.container .service-container p {
+    color: #666666; /* Set paragraph text color */
+    font-size: 1.1rem; /* Increase font size */
+    line-height: 1.6; /* Set line height for better readability */
+}
+
+.container .footer {
+    margin-top: 50px; /* Increase top margin for footer */
+    padding: 20px 0; /* Add padding */
+    background-color: #f9f9f9; /* Light background */
+    text-align: center;
+}
+
+.container .footer a {
+    color: #333333; /* Set link color */
+    text-decoration: none; /* Remove default underline */
+}
+
+.container .footer a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Custom CSS for the archive background image */
+.archive-bg {
+    max-width: 100%; /* Ensure the image doesn't exceed its container width */
+    height: auto; /* Maintain the image's aspect ratio */
+    display: inline-block; /* Display the image as an inline block element */
+    margin: 0 auto; /* Center the image horizontally */
+    width: 80%; /* Adjust the width of the image */
+}
+footer {
+    padding: 40px 0; /* Adjust top and bottom padding */
+}
+footer .container {
+    padding-left: 100px; /* Add padding to the left side of the container */
+    padding-right: 15px; /* Add padding to the right side of the container */
+}
+.footer-links {
+    margin-top: 20px; /* Add some margin above the footer links */
+}
+.footer-links a {
+    margin-right: 10px; /* Add some space between footer links */
+}
+.container-archive {
+    background-image: url('{% static "images/crmar.avif" %}'); /* Add your background image */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    padding: 120px; /* Add padding to the container */
+    padding-top: 220px;
+    padding-bottom: 120px;
+    border-radius: 10px; /* Add border-radius for a softer look */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    color: #fff; /* Set text color */
+    transition: background-image 0.5s ease; /* Add transition for smooth effect */
+    position: relative;
+}
+
+.container-archive:hover {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% static "images/crmar.avif" %}'); /* Add gradient overlay and set background image */
+}
+
+.container-archive h1,
+.container-archive h2,
+.container-archive h3,
+.container-archive h4,
+.container-archive h5,
+.container-archive h6,
+.container-archive p {
+    color: #fff; /* Set text color to white for headings and paragraphs */
+    transition: color 0.5s ease; /* Add transition for smooth color change */
+}
+
+.container-archive a {
+    color: #ffc107; /* Set link color to a contrasting color */
+}
+
+.container-archive a:hover {
+    color: #ffca28; /* Set link hover color */
+}
+
+/* Custom styling for the text-muted class */
+.lead1 {
+    color: #fcf9f9; /* Change the color of muted text */
+    font-style: italic; /* Change the font style to italic */
+    transition: color 0.5s ease; /* Add transition for smooth color change */
+}
+
+.container-archive .content1 {
+            opacity: 0;
+            transition: opacity 0.1s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+        }
+        .container-archive:hover .content1 {
+            opacity: 2;
+        }
+    </style>
+</head>
+<body>
+   <!-- Toggle button for vertical navbar -->
+   <div class="toggle-button" onclick="toggleNavbar()">
+    &#9776; <!-- Hamburger icon -->
+</div>
+
+    <!-- Vertical Navbar -->
+    <nav class="navbar" id="vertical-navbar">
+        <ul><li><a></a></li>
+            <li><a href="{% url 'crmarchive' %}">Archive<i class="bi bi-archive"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                  </svg>
+                </a></li>
+            <li><a href="{% url 'crmloginpage' %}">User home
+                <i class="bi bi-house"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                  </svg>
+            </a></li>
+            <li><a href="#">Sales<i class="bi bi-receipt"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt" viewBox="0 0 16 16">
+                    <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27m.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0z"/>
+                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5"/>
+                  </svg></a></li>
+            <li><a href="#">Settings<i class="bi bi-gear"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                  </svg></a></li>
+            <li><a href="{% url 'log_out' %}">Logout<i class="bi bi-box-arrow-left"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                  </svg></a></li>
+        </ul>
+    </nav>
+
+{% load static %}
+<div class="container content">
+    <div class="container-archive">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="content1">
+                    <h1 class="display-3 mb-4">Welcome to the Archive</h1>
+                    <p class="lead">Archive the files you wish with ease and efficiency</p>
+                    <hr class="my-4">
+                    <p class="lead1">Explore our collection and manage your files seamlessly</p>
+                </div>
+            </div>
+        </div>
+    </div></div>
+    <div class="cards">
+    <div class="row mt-3" id="card-container">
+        {% for app in product %}
+        {% if app.id not in archived_app_ids %}
+        <div class="col-md-3 mb-3">
+            <div class="card" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" data-app-id="{{ app.id }}">
+                <div class="card-body">
+                    <h1 class="card-title">{{ app.name }}</h1>
+                    <hr>
+                    <img class="card-img-top" src="{% static 'images/card.jpg' %}" alt="App Store Optimization">
+                    <p class="card-text"><b>{{ app.price }}</b></p>
+                </div>
+                <div class="card1">
+                    <div class="delete-icon" style="display: none;">
+                        <a href="{% url 'archive_app' app.id %}" class="delete-link" data-app-id="{{ app.id }}"><img src="{% static 'images/crmdelete.png' %}" class="img-fluid" width="56"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+    <footer class="bg-light text-black mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida turpis nec est finibus, a
+                        elementum ex malesuada.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <p>123, Street Name, City<br>Country</p>
+                    <p>Email: info@example.com<br>Phone: +1234567890</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+       <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script to toggle vertical navbar -->
+    <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("vertical-navbar");
+            if (navbar.style.left === "0px") {
+                navbar.style.left = "-200px"; // Hide the navbar
+            } else {
+                navbar.style.left = "0px"; // Show the navbar
+            }
+        }
+    </script>
+
+    <!-- Script to toggle horizontal navbar (responsive) -->
+    <script>
+        function toggleHorizontalNavbar() {
+            var navbar = document.querySelector(".horizontal-navbar");
+            if (navbar.style.top === "0px") {
+                navbar.style.top = "-50px"; // Hide the navbar
+            } else {
+                navbar.style.top = "0px"; // Show the navbar
+            }
+        }
+    </script>
+ <script>
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.dataset.appId);
+        // Show delete icon when dragging starts
+        event.target.querySelector('.delete-icon').style.display = 'block';
+    }
+
+    function dragEnd(event) {
+        // Hide delete icon when dragging ends
+        event.target.querySelector('.delete-icon').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', drag);
+        card.addEventListener('dragend', dragEnd);
+    });
+
+    const deleteIcons = document.querySelectorAll('.delete-icon');
+
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+
+        icon.addEventListener('drop', function (event) {
+            event.preventDefault();
+            const cardId = event.dataTransfer.getData("text"); // Get the ID of the dragged card
+            const appId = this.querySelector('.delete-link').getAttribute('data-app-id'); // Get the ID of the delete icon's associated card
+            if (cardId === appId) {
+                const url = this.querySelector('.delete-link').getAttribute('href').replace('app_id', cardId);
+                // Navigate to the URL to archive the card
+                window.location.href = url;
+            }
+        });
+    });
+});
+
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('dragstart', drag);
+            card.addEventListener('dragend', dragEnd);
+        });
+    
+</script>
+
+
+</body>
+</html>
